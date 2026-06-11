@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EVOZX Ultimate Factory — Deploy production-grade ERC-20 tokens on EVOZ Mainnet with zero backend infrastructure." />
+  <title>EVOZX Ultimate Factory v2.0</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/pages/home.css" />
+</head>
+<body>
+
+  <!-- ================================================
+       NAVBAR
+  ================================================= -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+
+      <!-- Logo -->
+      <a href="index.html" class="navbar__brand">
+        <div class="navbar__logo-mark">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#00AFFF" stroke-width="1.5"/>
+            <polygon points="14,7 21,11 21,18 14,22 7,18 7,11" fill="#00AFFF" opacity="0.15"/>
+            <circle cx="14" cy="14" r="3" fill="#00AFFF"/>
+          </svg>
+        </div>
+        <span class="navbar__brand-text">EVOZX <span class="navbar__brand-accent">Factory</span></span>
+        <span class="navbar__version-badge">v2.0</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="navbar__nav" id="mainNav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link active" data-page="home">Home</a>
+        <a href="pages/create.html" class="nav-link" data-page="create">Create Token</a>
+        <a href="pages/explore.html" class="nav-link" data-page="explore">Explore</a>
+        <a href="pages/my-tokens.html" class="nav-link" data-page="my-tokens">My Tokens</a>
+        <a href="pages/verification.html" class="nav-link" data-page="verification">Verification</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="navbar__actions">
+        <div class="network-badge" id="networkBadge">
+          <span class="network-badge__dot"></span>
+          <span class="network-badge__label" id="networkLabel">EVOZ Mainnet</span>
+        </div>
+        <button class="btn btn--connect" id="connectWalletBtn" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          </svg>
+          <span id="connectBtnLabel">Connect Wallet</span>
+        </button>
+        <!-- Mobile menu toggle -->
+        <button class="navbar__hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="navbar__mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link active" data-page="home">Home</a>
+      <a href="pages/create.html" class="nav-link" data-page="create">Create Token</a>
+      <a href="pages/explore.html" class="nav-link" data-page="explore">Explore</a>
+      <a href="pages/my-tokens.html" class="nav-link" data-page="my-tokens">My Tokens</a>
+      <a href="pages/verification.html" class="nav-link" data-page="verification">Verification Center</a>
+    </nav>
+  </header>
+
+  <!-- ================================================
+       MAIN CONTENT
+  ================================================= -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="heroHeading">
+      <div class="hero__grid-bg" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--left" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--right" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__eyebrow">
+          <span class="chip chip--cyan">EVOZ Mainnet · Chain ID 805</span>
+        </div>
+        <h1 class="hero__heading" id="heroHeading">
+          Deploy Production-Grade<br />
+          <span class="text-gradient">ERC-20 Tokens</span>
+        </h1>
+        <p class="hero__subheading">
+          A professional token factory with built-in security controls, tax mechanics, and a complete verification toolkit — no backend, no compromise.
+        </p>
+        <div class="hero__actions">
+          <a href="pages/create.html" class="btn btn--primary btn--lg">
+            Launch Token
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="pages/explore.html" class="btn btn--ghost btn--lg">Explore Tokens</a>
+        </div>
+
+        <!-- Live Stats Bar -->
+        <div class="stats-bar" id="statsBar">
+          <div class="stats-bar__item">
+            <span class="stats-bar__value mono" id="statTotalTokens">—</span>
+            <span class="stats-bar__label">Tokens Deployed</span>
+          </div>
+          <div class="stats-bar__divider" aria-hidden="true"></div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value mono">805</span>
+            <span class="stats-bar__label">Chain ID</span>
+          </div>
+          <div class="stats-bar__divider" aria-hidden="true"></div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value mono">v2.0.0</span>
+            <span class="stats-bar__label">Factory Version</span>
+          </div>
+          <div class="stats-bar__divider" aria-hidden="true"></div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value mono">≤10%</span>
+            <span class="stats-bar__label">Max Tax</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE GRID -->
+    <section class="features section" aria-labelledby="featuresHeading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">What You Get</p>
+          <h2 class="section-title" id="featuresHeading">Built for serious deployments</h2>
+          <p class="section-subtitle">Every feature maps directly to an on-chain parameter — no fluff, no hidden complexity.</p>
+        </div>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <div class="feature-card__icon feature-card__icon--cyan">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="feature-card__title">Security Controls</h3>
+            <p class="feature-card__desc">Max wallet, max transaction, and trading gate — configurable at deploy time and enforced directly in the transfer hook.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon feature-card__icon--gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <h3 class="feature-card__title">Tax Mechanics</h3>
+            <p class="feature-card__desc">Buy and sell taxes up to 10%, with configurable burn share, marketing wallet, and development wallet splits.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon feature-card__icon--cyan">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="feature-card__title">Verification Toolkit</h3>
+            <p class="feature-card__desc">Export Standard Input JSON and constructor arguments — ready to paste into any block explorer's verification form.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon feature-card__icon--gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <h3 class="feature-card__title">Token Explorer</h3>
+            <p class="feature-card__desc">Browse every token deployed through the factory. Filter by creator, feature set, or deployment date — all read from chain.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon feature-card__icon--cyan">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <h3 class="feature-card__title">Creator Portfolio</h3>
+            <p class="feature-card__desc">Every wallet has a persistent on-chain portfolio. Track your deployments, manage metadata, and monitor activity.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon feature-card__icon--gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3 class="feature-card__title">Fee Transparency</h3>
+            <p class="feature-card__desc">Deployment fee calculated on-chain before you sign. 30% burned, 70% to treasury — verifiable in every transaction.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOW STRIP -->
+    <section class="workflow section" aria-labelledby="workflowHeading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">The Process</p>
+          <h2 class="section-title" id="workflowHeading">Deploy → Verify → Manage</h2>
+        </div>
+
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="workflow-step__number mono">01</div>
+            <div class="workflow-step__content">
+              <h3>Configure</h3>
+              <p>Set your token parameters — supply, features, tax, security. The fee calculator updates in real time.</p>
+            </div>
+          </div>
+          <div class="workflow-step__connector" aria-hidden="true"></div>
+          <div class="workflow-step">
+            <div class="workflow-step__number mono">02</div>
+            <div class="workflow-step__content">
+              <h3>Deploy</h3>
+              <p>Approve EVOZX fee and confirm the factory transaction. Your token is live on EVOZ Mainnet in seconds.</p>
+            </div>
+          </div>
+          <div class="workflow-step__connector" aria-hidden="true"></div>
+          <div class="workflow-step">
+            <div class="workflow-step__number mono">03</div>
+            <div class="workflow-step__content">
+              <h3>Verify</h3>
+              <p>Download your Standard Input JSON and constructor args, then submit to the block explorer — one click.</p>
+            </div>
+          </div>
+          <div class="workflow-step__connector" aria-hidden="true"></div>
+          <div class="workflow-step">
+            <div class="workflow-step__number mono">04</div>
+            <div class="workflow-step__content">
+              <h3>Manage</h3>
+              <p>Control trading, update metadata, manage exclusions, and monitor your token — all from your portfolio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner section" aria-labelledby="ctaHeading">
+      <div class="container">
+        <div class="cta-banner__inner">
+          <div class="cta-banner__glow" aria-hidden="true"></div>
+          <h2 class="cta-banner__title" id="ctaHeading">Ready to deploy your token?</h2>
+          <p class="cta-banner__sub">Connect your wallet and configure your token in under two minutes.</p>
+          <a href="pages/create.html" class="btn btn--primary btn--lg">
+            Start Building
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================
+       FOOTER
+  ================================================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__brand-name">EVOZX Ultimate Factory</span>
+        <span class="footer__version mono">v2.0.0 · Chain 805</span>
+      </div>
+      <div class="footer__links">
+        <a href="pages/create.html" class="footer__link">Create Token</a>
+        <a href="pages/explore.html" class="footer__link">Explore</a>
+        <a href="pages/verification.html" class="footer__link">Verification</a>
+      </div>
+      <div class="footer__contract">
+        <span class="footer__contract-label">Factory</span>
+        <span class="footer__contract-addr mono" title="0xbA40773bCF0d30e83c4319796Ec45CA31d6e64bB">0xbA407…64bB</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================
+       TOAST CONTAINER
+  ================================================= -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ================================================
+       SCRIPTS
+  ================================================= -->
+  <!-- Ethers.js v6 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+  <!-- App Core -->
+  <script src="js/core/config.js"></script>
+  <script src="js/core/wallet.js"></script>
+  <script src="js/core/contract.js"></script>
+  <!-- UI Modules -->
+  <script src="js/modules/nav.js"></script>
+  <script src="js/modules/toast.js"></script>
+  <!-- Page Script -->
+  <script src="js/pages/home.js"></script>
+</body>
+  </html>
