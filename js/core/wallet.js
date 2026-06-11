@@ -1,0 +1,158 @@
+/* ============================================================
+   EVOZX ULTIMATE FACTORY — WALLET MANAGER
+   Handles: connect, disconnect, network switch, state sync
+   Depends on: ethers (UMD global), config.js
+   ============================================================ */
+
+const WalletManager = (() => {
+
+  // ── State ────────────────────────────────────────────────
+
+  let _provider  = null;
+  let _signer    = null;
+  let _address   = null;
+  let _chainId   = null;
+  let _listeners = {};
+
+  // ── Helpers ──────────────────────────────────────────────
+
+  function _short(addr) {
+    if (!addr) return '';
+    return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+  }
+
+  function _emit(event, data) {
+    (_listeners[event] || []).forEach(fn => fn(data));
+  }
+
+  function _updateUI() {
+    const btn   = document.getElementById('connectWalletBtn');
+    const label = document.getElementById('connectBtnLabel');
+    if (!btn || !label) return;
+
+    if (_address) {
+      label.textContent = _short(_address);
+      btn.classList.add('connected');
+    } else {
+      label.textContent = 'Connect Wallet';
+      btn.classList.remove('connected');
+    }
+  }
+
+  // ── Network check & switch ────────────────────────────────
+
+  async function _ensureNetwork() {
+    const network = await _provider.getNetwork();
+    _chainId = Number(network.chainId);
+
+    if (_chainId !== EVOZX_CONFIG.CHAIN.ID) {
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: EVOZX_CONFIG.CHAIN.ID_HEX }],
+        });
+      } catch (switchErr) {
+        // Chain not added — add it
+        if (switchErr.code === 4902) {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId:           EVOZX_CONFIG.CHAIN.ID_HEX,
+              chainName:         EVOZX_CONFIG.CHAIN.NAME,
+              nativeCurrency:    EVOZX_CONFIG.CHAIN.CURRENCY,
+              rpcUrls:           [EVOZX_CONFIG.CHAIN.RPC_URL],
+              blockExplorerUrls: [EVOZX_CONFIG.CHAIN.EXPLORER_URL],
+            }],
+          });
+        } else {
+          throw switchErr;
+        }
+      }
+      // Re-init provider after switch
+      _provider = new ethers.BrowserProvider(window.ethereum);
+      _chainId  = EVOZX_CONFIG.CHAIN.ID;
+    }
+  }
+
+  // ── Connect ───────────────────────────────────────────────
+
+  async function connect() {
+    if (!window.ethereum) {
+      Toast.show('error', 'No Wallet Found', 'Install MetaMask or a compatible wallet to continue.');
+      return null;
+    }
+
+    try {
+      _provider = new ethers.BrowserProvider(window.ethereum);
+      await _provider.send('eth_requestAccounts', []);
+      await _ensureNetwork();
+
+      _signer  = await _provider.getSigner();
+      _address = await _signer.getAddress();
+      _chainId = EVOZX_CONFIG.CHAIN.ID;
+
+      _updateUI();
+      _emit('connected', { address: _address, chainId: _chainId });
+      Toast.show('success', 'Wallet Connected', _short(_address));
+
+      return { provider: _provider, signer: _signer, address: _address };
+    } catch (err) {
+      if (err.code === 4001) {
+        Toast.show('warning', 'Connection Rejected', 'You cancelled the wallet request.');
+      } else {
+        Toast.show('error', 'Connection Failed', err.message || 'Unexpected error.');
+      }
+      return null;
+    }
+  }
+
+  // ── Disconnect ────────────────────────────────────────────
+
+  function disconnect() {
+    _provider  = null;
+    _signer    = null;
+    _address   = null;
+    _chainId   = null;
+    _updateUI();
+    _emit('disconnected', {});
+  }
+
+  // ── Getters ───────────────────────────────────────────────
+
+  function getAddress()  { return _address; }
+  function getSigner()   { return _signer; }
+  function getProvider() { return _provider; }
+  function getChainId()  { return _chainId; }
+  function isConnected() { return !!_address; }
+
+  // ── Event subscription ────────────────────────────────────
+
+  function on(event, fn) {
+    if (!_listeners[event]) _listeners[event] = [];
+    _listeners[event].push(fn);
+  }
+
+  // ── MetaMask event hooks ──────────────────────────────────
+
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', (accounts) => {
+      if (accounts.length === 0) {
+        disconnect();
+      } else {
+        _address = accounts[0];
+        _updateUI();
+        _emit('accountChanged', { address: _address });
+      }
+    });
+
+    window.ethereum.on('chainChanged', () => {
+      // Safest: full reload on chain change
+      window.location.reload();
+    });
+  }
+
+  // ── Public API ────────────────────────────────────────────
+
+  return { connect, disconnect, getAddress, getSigner, getProvider, getChainId, isConnected, on };
+
+})();
