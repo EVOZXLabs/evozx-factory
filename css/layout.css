@@ -1,0 +1,384 @@
+/* ============================================================
+   EVOZX ULTIMATE FACTORY — LAYOUT
+   Container, sections, hero, features, workflow, footer
+   ============================================================ */
+
+/* ── Container ────────────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* ── Page wrapper (non-home pages) ───────────────────────── */
+
+.page-wrapper {
+  padding-top: calc(var(--navbar-height) + var(--space-12));
+  padding-bottom: var(--space-24);
+  min-height: 100vh;
+}
+
+/* ── Section ──────────────────────────────────────────────── */
+
+.section {
+  padding: var(--space-24) 0;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-12);
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  margin-bottom: var(--space-3);
+}
+
+.section-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.section-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+/* ── HERO ─────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(var(--navbar-height) + var(--space-20));
+  padding-bottom: var(--space-20);
+}
+
+.hero__grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 175, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 175, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+}
+
+.hero__glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.hero__glow--left {
+  top: -200px;
+  left: -200px;
+  background: radial-gradient(circle, rgba(0, 175, 255, 0.10) 0%, transparent 70%);
+}
+
+.hero__glow--right {
+  top: -100px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.hero__eyebrow {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__heading {
+  font-size: clamp(var(--text-2xl), 5vw, var(--text-4xl));
+  font-weight: var(--fw-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  max-width: 760px;
+}
+
+.hero__subheading {
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  line-height: var(--leading-normal);
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── STATS BAR ────────────────────────────────────────────── */
+
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-5) var(--space-8);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stats-bar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.stats-bar__value {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.stats-bar__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.stats-bar__divider {
+  width: 1px;
+  height: 32px;
+  background: var(--color-border-subtle);
+}
+
+/* ── FEATURE GRID ─────────────────────────────────────────── */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+/* ── WORKFLOW ─────────────────────────────────────────────── */
+
+.workflow {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 175, 255, 0.02) 50%,
+    transparent 100%
+  );
+}
+
+.workflow-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.workflow-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+}
+
+.workflow-step__number {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-cyan);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.workflow-step__content h3 {
+  font-size: var(--text-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.workflow-step__content p {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.workflow-step__connector {
+  flex-shrink: 0;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-cyan-dim), rgba(0, 175, 255, 0.05));
+  margin-top: 52px;
+  align-self: flex-start;
+}
+
+/* ── CTA BANNER ───────────────────────────────────────────── */
+
+.cta-banner__inner {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: var(--space-16) var(--space-8);
+  background: var(--color-bg-card);
+  border: 1px solid rgba(0, 175, 255, 0.20);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.cta-banner__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 175, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-banner__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-banner__sub {
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-banner .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+
+.footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding: var(--space-8) 0;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.footer__brand-name {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+.footer__version {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.footer__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast);
+}
+
+.footer__link:hover { color: var(--color-text-secondary); }
+
+.footer__contract {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+}
+
+.footer__contract-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.footer__contract-addr {
+  font-size: var(--text-xs);
+  color: var(--color-cyan);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+
+@media (max-width: 960px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .workflow-steps { flex-direction: column; align-items: stretch; }
+  .workflow-step__connector { display: none; }
+  .workflow-step { align-items: flex-start; text-align: left; flex-direction: row; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --container-pad: var(--space-4);
+  }
+
+  .feature-grid { grid-template-columns: 1fr; }
+
+  .stats-bar {
+    gap: var(--space-6);
+    padding: var(--space-5);
+  }
+
+  .stats-bar__divider { display: none; }
+
+  .hero__actions { flex-direction: column; width: 100%; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
+
+  .footer__inner { flex-direction: column; align-items: flex-start; }
+  .footer__links { flex-wrap: wrap; gap: var(--space-4); }
+
+  .cta-banner__inner { padding: var(--space-10) var(--space-5); }
+}
