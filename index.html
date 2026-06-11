@@ -6,12 +6,6 @@
   <meta name="description" content="EVOZX Ultimate Factory — Deploy production-grade ERC-20 tokens on EVOZ Mainnet with zero backend infrastructure." />
   <title>EVOZX Ultimate Factory v2.0</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/design-tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/components.css" />
@@ -20,26 +14,21 @@
 </head>
 <body>
 
-  <!-- ================================================
-       NAVBAR
-  ================================================= -->
   <header class="navbar" id="navbar">
     <div class="container navbar__inner">
 
-      <!-- Logo -->
       <a href="index.html" class="navbar__brand">
         <div class="navbar__logo-mark">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#00AFFF" stroke-width="1.5"/>
-            <polygon points="14,7 21,11 21,18 14,22 7,18 7,11" fill="#00AFFF" opacity="0.15"/>
-            <circle cx="14" cy="14" r="3" fill="#00AFFF"/>
+            <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+            <polygon points="14,7 21,11 21,18 14,22 7,18 7,11" fill="#D4AF37" opacity="0.15"/>
+            <circle cx="14" cy="14" r="3" fill="#D4AF37"/>
           </svg>
         </div>
         <span class="navbar__brand-text">EVOZX <span class="navbar__brand-accent">Factory</span></span>
         <span class="navbar__version-badge">v2.0</span>
       </a>
 
-      <!-- Desktop Nav -->
       <nav class="navbar__nav" id="mainNav" aria-label="Main navigation">
         <a href="index.html" class="nav-link active" data-page="home">Home</a>
         <a href="pages/create.html" class="nav-link" data-page="create">Create Token</a>
@@ -48,7 +37,6 @@
         <a href="pages/verification.html" class="nav-link" data-page="verification">Verification</a>
       </nav>
 
-      <!-- Right Actions -->
       <div class="navbar__actions">
         <div class="network-badge" id="networkBadge">
           <span class="network-badge__dot"></span>
@@ -60,7 +48,6 @@
           </svg>
           <span id="connectBtnLabel">Connect Wallet</span>
         </button>
-        <!-- Mobile menu toggle -->
         <button class="navbar__hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -68,7 +55,6 @@
 
     </div>
 
-    <!-- Mobile Nav Drawer -->
     <nav class="navbar__mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
       <a href="index.html" class="nav-link active" data-page="home">Home</a>
       <a href="pages/create.html" class="nav-link" data-page="create">Create Token</a>
@@ -78,12 +64,8 @@
     </nav>
   </header>
 
-  <!-- ================================================
-       MAIN CONTENT
-  ================================================= -->
   <main>
 
-    <!-- HERO -->
     <section class="hero" aria-labelledby="heroHeading">
       <div class="hero__grid-bg" aria-hidden="true"></div>
       <div class="hero__glow hero__glow--left" aria-hidden="true"></div>
@@ -108,7 +90,6 @@
           <a href="pages/explore.html" class="btn btn--ghost btn--lg">Explore Tokens</a>
         </div>
 
-        <!-- Live Stats Bar -->
         <div class="stats-bar" id="statsBar">
           <div class="stats-bar__item">
             <span class="stats-bar__value mono" id="statTotalTokens">—</span>
@@ -133,7 +114,6 @@
       </div>
     </section>
 
-    <!-- FEATURE GRID -->
     <section class="features section" aria-labelledby="featuresHeading">
       <div class="container">
         <div class="section-header">
@@ -196,7 +176,6 @@
       </div>
     </section>
 
-    <!-- WORKFLOW STRIP -->
     <section class="workflow section" aria-labelledby="workflowHeading">
       <div class="container">
         <div class="section-header">
@@ -240,7 +219,6 @@
       </div>
     </section>
 
-    <!-- CTA BANNER -->
     <section class="cta-banner section" aria-labelledby="ctaHeading">
       <div class="container">
         <div class="cta-banner__inner">
@@ -257,9 +235,6 @@
 
   </main>
 
-  <!-- ================================================
-       FOOTER
-  ================================================= -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
@@ -278,24 +253,15 @@
     </div>
   </footer>
 
-  <!-- ================================================
-       TOAST CONTAINER
-  ================================================= -->
   <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- ================================================
-       SCRIPTS
-  ================================================= -->
-  <!-- Ethers.js v6 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
-  <!-- App Core -->
   <script src="js/core/config.js"></script>
   <script src="js/core/wallet.js"></script>
   <script src="js/core/contract.js"></script>
-  <!-- UI Modules -->
   <script src="js/modules/nav.js"></script>
   <script src="js/modules/toast.js"></script>
-  <!-- Page Script -->
   <script src="js/pages/home.js"></script>
 </body>
-  </html>
+            </html>
+                
