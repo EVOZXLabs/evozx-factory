@@ -57,8 +57,6 @@ Upload the file:
 
 **standard-input.json** - [👉 Download here](https://raw.githubusercontent.com/EVOZXLabs/evozx-factory/main/assets/verification/ultimate-standard-input.json)
 
-from this verification package.
-
 ---
 
 ## Step 6
