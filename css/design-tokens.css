@@ -1,0 +1,147 @@
+/* ============================================================
+   EVOZX ULTIMATE FACTORY — DESIGN TOKENS
+   Single source of truth. Import first in every page.
+   ============================================================ */
+
+:root {
+
+  /* ──────────────────────────────────────────────
+     COLOR PALETTE
+  ────────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --color-bg-base:        #050816;
+  --color-bg-card:        #0B1328;
+  --color-bg-card-hover:  #0F1A38;
+  --color-bg-elevated:    #111F3E;
+  --color-bg-input:       #080F20;
+  --color-bg-overlay:     rgba(5, 8, 22, 0.85);
+
+  /* Borders */
+  --color-border:         rgba(0, 175, 255, 0.12);
+  --color-border-subtle:  rgba(255, 255, 255, 0.06);
+  --color-border-focus:   rgba(0, 175, 255, 0.50);
+
+  /* Brand — Cyan */
+  --color-cyan:           #00AFFF;
+  --color-cyan-bright:    #00E5FF;
+  --color-cyan-dim:       rgba(0, 175, 255, 0.15);
+  --color-cyan-glow:      rgba(0, 175, 255, 0.25);
+
+  /* Brand — Gold */
+  --color-gold:           #D4AF37;
+  --color-gold-bright:    #F0CC60;
+  --color-gold-dim:       rgba(212, 175, 55, 0.15);
+  --color-gold-glow:      rgba(212, 175, 55, 0.20);
+
+  /* Status */
+  --color-success:        #22C55E;
+  --color-success-dim:    rgba(34, 197, 94, 0.12);
+  --color-warning:        #F59E0B;
+  --color-warning-dim:    rgba(245, 158, 11, 0.12);
+  --color-error:          #EF4444;
+  --color-error-dim:      rgba(239, 68, 68, 0.12);
+
+  /* Text */
+  --color-text-primary:   #FFFFFF;
+  --color-text-secondary: #A8B3CF;
+  --color-text-muted:     #5A6580;
+  --color-text-disabled:  #3A4260;
+
+  /* ──────────────────────────────────────────────
+     TYPOGRAPHY
+  ────────────────────────────────────────────── */
+
+  /* Families */
+  --font-display:  'Syne', sans-serif;          /* Hero headings */
+  --font-body:     'Inter', sans-serif;          /* UI, body copy */
+  --font-mono:     'JetBrains Mono', monospace; /* Addresses, values */
+
+  /* Scale */
+  --text-xs:    0.700rem;   /* 11.2px */
+  --text-sm:    0.813rem;   /* 13px   */
+  --text-base:  0.938rem;   /* 15px   */
+  --text-md:    1.063rem;   /* 17px   */
+  --text-lg:    1.250rem;   /* 20px   */
+  --text-xl:    1.500rem;   /* 24px   */
+  --text-2xl:   2.000rem;   /* 32px   */
+  --text-3xl:   2.750rem;   /* 44px   */
+  --text-4xl:   3.750rem;   /* 60px   */
+
+  /* Weight */
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-extrabold:800;
+
+  /* Leading */
+  --leading-tight:  1.20;
+  --leading-snug:   1.40;
+  --leading-normal: 1.60;
+  --leading-loose:  1.80;
+
+  /* ──────────────────────────────────────────────
+     SPACING
+  ────────────────────────────────────────────── */
+
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.50rem;   /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1.00rem;   /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.50rem;   /* 24px */
+  --space-8:  2.00rem;   /* 32px */
+  --space-10: 2.50rem;   /* 40px */
+  --space-12: 3.00rem;   /* 48px */
+  --space-16: 4.00rem;   /* 64px */
+  --space-20: 5.00rem;   /* 80px */
+  --space-24: 6.00rem;   /* 96px */
+
+  /* ──────────────────────────────────────────────
+     BORDERS & RADIUS
+  ────────────────────────────────────────────── */
+
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* ──────────────────────────────────────────────
+     SHADOWS
+  ────────────────────────────────────────────── */
+
+  --shadow-card:    0 0 0 1px var(--color-border), 0 4px 24px rgba(0, 0, 0, 0.40);
+  --shadow-elevated: 0 0 0 1px var(--color-border), 0 8px 40px rgba(0, 0, 0, 0.60);
+  --shadow-cyan:    0 0 20px var(--color-cyan-glow);
+  --shadow-gold:    0 0 20px var(--color-gold-glow);
+  --shadow-focus:   0 0 0 3px rgba(0, 175, 255, 0.30);
+
+  /* ──────────────────────────────────────────────
+     TRANSITIONS
+  ────────────────────────────────────────────── */
+
+  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 250ms;
+  --duration-slow:   400ms;
+
+  /* ──────────────────────────────────────────────
+     LAYOUT
+  ────────────────────────────────────────────── */
+
+  --container-max:  1200px;
+  --container-pad:  var(--space-6);
+  --navbar-height:  68px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   0ms;
+    --duration-normal: 0ms;
+    --duration-slow:   0ms;
+  }
+}
