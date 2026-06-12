@@ -1,6 +1,6 @@
 /* ============================================================
    EVOZX ULTIMATE FACTORY — WALLET MANAGER
-   Handles: connect, disconnect, network switch, state sync
+   Handles: connect, disconnect, network switch, state sync, persistence
    Depends on: ethers (UMD global), config.js
    ============================================================ */
 
@@ -52,7 +52,6 @@ const WalletManager = (() => {
           params: [{ chainId: EVOZX_CONFIG.CHAIN.ID_HEX }],
         });
       } catch (switchErr) {
-        // Chain not added — add it
         if (switchErr.code === 4902) {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
@@ -68,40 +67,49 @@ const WalletManager = (() => {
           throw switchErr;
         }
       }
-      // Re-init provider after switch
       _provider = new ethers.BrowserProvider(window.ethereum);
       _chainId  = EVOZX_CONFIG.CHAIN.ID;
     }
   }
 
-  // ── Connect ───────────────────────────────────────────────
+  // ── Connect & Persistence ──────────────────────────────────
 
-  async function connect() {
+  async function connect(isAutoConnect = false) {
     if (!window.ethereum) {
-      Toast.show('error', 'No Wallet Found', 'Install MetaMask or a compatible wallet to continue.');
+      if (!isAutoConnect) Toast.show('error', 'No Wallet Found', 'Install MetaMask to continue.');
       return null;
     }
 
     try {
       _provider = new ethers.BrowserProvider(window.ethereum);
-      await _provider.send('eth_requestAccounts', []);
+      
+      // Request account if not auto-connecting
+      if (!isAutoConnect) {
+        await _provider.send('eth_requestAccounts', []);
+      }
+
       await _ensureNetwork();
 
       _signer  = await _provider.getSigner();
       _address = await _signer.getAddress();
       _chainId = EVOZX_CONFIG.CHAIN.ID;
 
-      _updateUI();
-      _emit('connected', { address: _address, chainId: _chainId });
-      Toast.show('success', 'Wallet Connected', _short(_address));
+      // Update Persistence
+      localStorage.setItem('isWalletConnected', 'true');
 
+      _updateUI();
+      if (!isAutoConnect) _emit('connected', { address: _address, chainId: _chainId });
+      
       return { provider: _provider, signer: _signer, address: _address };
     } catch (err) {
-      if (err.code === 4001) {
-        Toast.show('warning', 'Connection Rejected', 'You cancelled the wallet request.');
-      } else {
-        Toast.show('error', 'Connection Failed', err.message || 'Unexpected error.');
+      if (!isAutoConnect) {
+        if (err.code === 4001) {
+          Toast.show('warning', 'Connection Rejected', 'You cancelled the request.');
+        } else {
+          Toast.show('error', 'Connection Failed', err.message || 'Error occurred.');
+        }
       }
+      disconnect(); // Clear state if connection fails
       return null;
     }
   }
@@ -113,26 +121,34 @@ const WalletManager = (() => {
     _signer    = null;
     _address   = null;
     _chainId   = null;
+    localStorage.removeItem('isWalletConnected');
     _updateUI();
     _emit('disconnected', {});
   }
 
-  // ── Getters ───────────────────────────────────────────────
+  // ── Getters & Subscriptions ───────────────────────────────
 
   function getAddress()  { return _address; }
   function getSigner()   { return _signer; }
   function getProvider() { return _provider; }
   function getChainId()  { return _chainId; }
   function isConnected() { return !!_address; }
-
-  // ── Event subscription ────────────────────────────────────
-
   function on(event, fn) {
     if (!_listeners[event]) _listeners[event] = [];
     _listeners[event].push(fn);
   }
 
-  // ── MetaMask event hooks ──────────────────────────────────
+  // ── Init / Auto-Reconnect ─────────────────────────────────
+
+  async function _init() {
+    // Tunggu DOM siap sebelum update UI
+    if (localStorage.getItem('isWalletConnected') === 'true') {
+      // Tunggu sebentar untuk memastikan provider tersedia
+      setTimeout(async () => {
+        await connect(true); 
+      }, 500);
+    }
+  }
 
   if (window.ethereum) {
     window.ethereum.on('accountsChanged', (accounts) => {
@@ -146,12 +162,12 @@ const WalletManager = (() => {
     });
 
     window.ethereum.on('chainChanged', () => {
-      // Safest: full reload on chain change
       window.location.reload();
     });
   }
 
-  // ── Public API ────────────────────────────────────────────
+  // Jalankan auto-init
+  _init();
 
   return { connect, disconnect, getAddress, getSigner, getProvider, getChainId, isConnected, on };
 
