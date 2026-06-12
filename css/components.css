@@ -3,7 +3,6 @@
    Reusable UI components: Navbar, Buttons, Cards, Inputs, Toast
    ============================================================ */
 
-
 /* ── NAVBAR ───────────────────────────────────────────────── */
 
 .navbar {
@@ -58,7 +57,7 @@
 }
 
 .navbar__brand-accent {
-  color: var(--color-cyan);
+  color: var(--color-accent);
 }
 
 .navbar__version-badge {
@@ -95,8 +94,8 @@
 }
 
 .nav-link.active {
-  color: var(--color-cyan-bright);
-  background: var(--color-cyan-dim);
+  color: var(--color-accent-bright);
+  background: var(--color-accent-dim);
 }
 
 /* Navbar Actions (Right Side) */
@@ -116,8 +115,8 @@
   width: 6px;
   height: 6px;
   border-radius: var(--radius-full);
-  background-color: var(--color-cyan);
-  box-shadow: 0 0 8px var(--color-cyan);
+  background-color: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent-glow);
 }
 
 .network-badge__label {
@@ -240,13 +239,13 @@
 
 /* Primary — Gold Fill */
 .btn--primary {
-  background: var(--color-cyan);
+  background: var(--color-accent);
   color: var(--color-bg-base);
 }
 
 .btn--primary:hover {
-  background: var(--color-cyan-bright);
-  box-shadow: var(--shadow-cyan);
+  background: var(--color-accent-bright);
+  box-shadow: var(--shadow-accent);
 }
 
 /* Ghost — Border Only */
@@ -257,8 +256,8 @@
 }
 
 .btn--ghost:hover {
-  background: var(--color-cyan-dim);
-  border-color: var(--color-cyan);
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
 }
 
 /* Connect Wallet Unique Button State */
@@ -269,19 +268,19 @@
 }
 
 .btn--connect:hover {
-  border-color: var(--color-cyan);
+  border-color: var(--color-accent);
   background: var(--color-bg-card-hover);
 }
 
 .btn--connect.connected {
-  background: var(--color-cyan-dim);
-  color: var(--color-cyan-bright);
-  border-color: rgba(212, 175, 55, 0.3);
+  background: var(--color-accent-dim);
+  color: var(--color-accent-bright);
+  border-color: var(--color-accent-glow);
 }
 
 .btn--connect.connected:hover {
   background: rgba(212, 175, 55, 0.2);
-  border-color: var(--color-cyan);
+  border-color: var(--color-accent);
 }
 
 
@@ -391,13 +390,13 @@
 }
 
 .toggle__input:checked + .toggle__track {
-  background-color: var(--color-cyan-dim);
+  background-color: var(--color-accent-dim);
   border-color: rgba(212, 175, 55, 0.5);
 }
 
 .toggle__input:checked + .toggle__track .toggle__thumb {
   transform: translateX(18px);
-  background-color: var(--color-cyan);
+  background-color: var(--color-accent);
 }
 
 
@@ -459,7 +458,7 @@
 .toast--success { border-left: 3px solid var(--color-success); }
 .toast--error   { border-left: 3px solid var(--color-error); }
 .toast--warning { border-left: 3px solid var(--color-warning); }
-.toast--info    { border-left: 3px solid var(--color-cyan); }
+.toast--info    { border-left: 3px solid var(--color-accent); }
 
 .toast__icon { flex-shrink: 0; margin-top: 1px; }
 .toast__title {
