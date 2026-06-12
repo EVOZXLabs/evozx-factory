@@ -432,6 +432,22 @@
   opacity: 0;
 }
 
+/* Toast Exit Animation */
+.toast.removing {
+  animation: toast-out var(--duration-normal) forwards;
+}
+
+@keyframes toast-out {
+  from { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+  to { 
+    opacity: 0; 
+    transform: translateX(40px); 
+  }
+}
+
 /* Accent status side markers */
 .toast--success { border-left: 3px solid var(--color-success); }
 .toast--error   { border-left: 3px solid var(--color-error); }
