@@ -1,38 +1,40 @@
-// js/pages/create.js
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('createTokenForm');
     const deployBtn = document.getElementById('deployBtn');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // Cek koneksi wallet
-        if (typeof window.ethereum === 'undefined') {
-            return alert('Please install MetaMask!');
+
+        // 1. Check wallet connection
+        if (!WalletManager.isConnected()) {
+            Toast.show('error', 'Wallet', 'Please connect your wallet first.');
+            return;
         }
 
+        // 2. Prepare data
+        const rawSupply = document.getElementById('tokenSupply').value;
         const config = {
             name: document.getElementById('tokenName').value,
             symbol: document.getElementById('tokenSymbol').value,
-            supply: document.getElementById('tokenSupply').value
+            supply: ethers.parseUnits(rawSupply, 18) // Convert to 18 decimals
         };
 
+        // 3. Execute deployment
         try {
             deployBtn.disabled = true;
             deployBtn.innerText = 'Deploying...';
             
-            // Panggil fungsi dari contract.js
-            await ContractManager.createToken(config);
+            const result = await ContractManager.createToken(config);
             
-            alert('Token berhasil di-deploy!');
+            Toast.show('success', 'Deployed!', `Token created at: ${result.tokenAddress.slice(0, 10)}...`);
             form.reset();
+            
         } catch (err) {
-            console.error(err);
-            alert('Gagal: ' + err.message);
+            console.error('Deployment Error:', err);
+            Toast.show('error', 'Failed', err.reason || err.message || 'Transaction rejected.');
         } finally {
             deployBtn.disabled = false;
             deployBtn.innerText = 'Deploy Token';
         }
     });
 });
-
