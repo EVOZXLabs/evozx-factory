@@ -75,7 +75,7 @@ p {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-cyan-bright) 0%, var(--color-cyan) 100%);
+  background: linear-gradient(135deg, var(--color-accent-bright) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -98,13 +98,13 @@ p {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 175, 55, 0.35);
+  background: var(--color-accent-glow);
 }
 
 /* ── Focus ────────────────────────────────────────────────── */
 
 :focus-visible {
-  outline: 2px solid var(--color-cyan);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -124,16 +124,16 @@ p {
   text-transform: uppercase;
 }
 
-.chip--cyan {
-  background: var(--color-cyan-dim);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  color: var(--color-cyan-bright);
+.chip--accent {
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-accent-glow);
+  color: var(--color-accent-bright);
 }
 
-.chip--gold {
-  background: var(--color-gold-dim);
-  border: 1px solid rgba(170, 124, 17, 0.25);
-  color: var(--color-gold-bright);
+.chip--secondary {
+  background: var(--color-secondary-dim);
+  border: 1px solid var(--color-secondary-glow);
+  color: var(--color-secondary-bright);
 }
 
 .chip--success {
