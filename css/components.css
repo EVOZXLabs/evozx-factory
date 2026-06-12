@@ -434,7 +434,7 @@
 
 /* Toast Exit Animation */
 .toast.removing {
-  animation: toast-out var(--duration-normal) forwards;
+  animation: toast-out 0.2s forwards;
 }
 
 @keyframes toast-out {
