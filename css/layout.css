@@ -514,3 +514,24 @@
     padding: var(--space-8);
   }
 }
+
+/* ── Mobile Typography Fixes ────────────────────────────── */
+@media (max-width: 480px) {
+  :root {
+    /* Kita buat ukuran teks sedikit lebih compact di HP */
+    --text-2xl: 1.25rem; /* ~20px */
+    --text-xl: 1.125rem; /* ~18px */
+    --text-lg: 1rem;     /* ~16px */
+    --text-base: 0.875rem; /* ~14px */
+    --text-sm: 0.75rem;   /* ~12px */
+  }
+
+  /* Footer Adjustment agar lebih ringkas */
+  .footer {
+    padding: var(--space-6) 0;
+  }
+  
+  .footer__link {
+    font-size: var(--text-sm);
+  }
+}
