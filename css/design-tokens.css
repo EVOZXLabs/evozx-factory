@@ -1,100 +1,23 @@
-/* ============================================================
-   EVOZX ULTIMATE FACTORY — DESIGN TOKENS
-   Single source of truth. Import first in every page.
-   ============================================================ */
-
 :root {
-  /* ──────────────────────────────────────────────
-     COLOR PALETTE
-     Theme: Black, Gold, Blue
-     ────────────────────────────────────────────── */
-
-  /* Backgrounds */
-  --color-bg-base:        #000000;
-  --color-bg-card:        #0A0A0A;
-  --color-bg-card-hover:  #121212;
-  --color-bg-elevated:    #181818;
-  --color-bg-input:       #050505;
-
-  /* Brand: Gold (Luxury/Factory) */
-  --color-gold:           #D4AF37;
-  --color-gold-bright:    #F3E5AB;
-  --color-gold-dim:       rgba(212, 175, 55, 0.12);
-  --color-gold-glow:      rgba(212, 175, 55, 0.25);
-
-  /* Brand: Blue/Cyan (Tech/Network) */
-  --color-blue:           #00E5FF;
-  --color-blue-bright:    #A3F8FF;
-  --color-blue-dim:       rgba(0, 229, 255, 0.12);
-  --color-blue-glow:      rgba(0, 229, 255, 0.25);
-
-  /* Borders & Focus */
-  --color-border:         rgba(212, 175, 55, 0.15);
-  --color-border-subtle:  rgba(255, 255, 255, 0.08);
-  --color-border-focus:   var(--color-gold);
-
-  /* Text Colors */
-  --color-text-primary:   #FFFFFF;
-  --color-text-secondary: #CCCCCC;
-  --color-text-muted:     #777777;
-
-  /* Status Colors */
-  --color-success:        #22C55E;
-  --color-error:          #EF4444;
-  --color-warning:        #F59E0B;
-
-  /* ──────────────────────────────────────────────
-     TYPOGRAPHY
-     ────────────────────────────────────────────── */
-
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-
-  --text-xs:    0.75rem;
-  --text-sm:    0.875rem;
-  --text-base:  1rem;
-  --text-lg:    1.125rem;
-  --text-xl:    1.25rem;
-  --text-2xl:   1.5rem;
-  --text-3xl:   1.875rem;
-  --text-4xl:   2.25rem;
-  --text-5xl:   3rem;
-
-  --fw-regular:  400;
-  --fw-medium:   500;
-  --fw-semibold: 600;
-  --fw-bold:     700;
-  --fw-black:    800;
-
-  /* ──────────────────────────────────────────────
-     SPACING & LAYOUT
-     ────────────────────────────────────────────── */
-
-  --navbar-height: 4.5rem;
-  --container-max: 76.25rem;
-  --container-pad: 1.5rem;
-
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-
-  /* ──────────────────────────────────────────────
-     COMPONENTS & EFFECTS
-     ────────────────────────────────────────────── */
-
-  --radius-md:  8px;
-  --radius-lg:  12px;
-  --radius-xl:  20px;
-
-  --transition-default: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Color Palette */
+  --color-black: #050505;
+  --color-gold: #D4AF37;
+  --color-blue: #007AFF;
+  --color-white: #FFFFFF;
+  --color-gray: #1A1A1A;
   
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.15);
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Spacing */
+  --space-unit: 8px;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
