@@ -1,31 +1,51 @@
+/* ============================================================
+   js/pages/explore.js
+   Logic for Explore Tokens page
+   ============================================================ */
+
+import { ContractManager } from '../core/contract.js';
+import { Toast } from '../modules/toast.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const grid = document.getElementById('tokenGrid');
+  const tokenGrid = document.getElementById('tokenGrid');
 
+  async function loadTokens() {
     try {
-        // Fetch tokens (pastikan fungsi ini ada di ContractManager Anda)
-        const tokens = await ContractManager.getAllTokens();
+      // 1. Ambil list token dari kontrak
+      const tokens = await ContractManager.getAllTokens();
+      
+      // Bersihkan loading state
+      tokenGrid.innerHTML = '';
 
-        if (!tokens || tokens.length === 0) {
-            grid.innerHTML = '<p style="color: var(--color-text-muted);">No tokens found on the network yet.</p>';
-            return;
-        }
+      if (tokens.length === 0) {
+        tokenGrid.innerHTML = '<p>No tokens deployed yet.</p>';
+        return;
+      }
 
-        // Render tokens
-        grid.innerHTML = tokens.map(token => `
-            <div class="card card--interactive">
-                <h3 style="margin-bottom: var(--space-2);">${token.name} (${token.symbol})</h3>
-                <p style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-secondary);">
-                    Address: ${token.address.slice(0, 10)}...${token.address.slice(-6)}
-                </p>
-                <div style="margin-top: var(--space-4);">
-                    <a href="https://evozscan.com/address/${token.address}" target="_blank" class="btn btn--ghost">View on Explorer</a>
-                </div>
-            </div>
-        `).join('');
+      // 2. Loop dan render setiap token
+      tokens.forEach(async (token) => {
+        // Asumsi 'token' adalah object atau address. 
+        // Jika hanya address, panggil ContractManager.getTokenInfo(address)
+        const info = typeof token === 'string' ? await ContractManager.getTokenInfo(token) : token;
+        
+        const card = document.createElement('div');
+        card.className = 'feature-card';
+        card.innerHTML = `
+          <h3 class="feature-card__title">${info.name || 'Unknown Token'}</h3>
+          <p class="feature-card__desc">Symbol: ${info.symbol || 'N/A'}</p>
+          <div class="mt-4">
+             <a href="token-detail.html?address=${info.tokenAddress}" class="btn btn--sm">View Details</a>
+          </div>
+        `;
+        tokenGrid.appendChild(card);
+      });
 
     } catch (err) {
-        console.error('Error fetching tokens:', err);
-        Toast.show('error', 'Network Error', 'Failed to load tokens. Please try again.');
+      console.error('Error loading tokens:', err);
+      tokenGrid.innerHTML = '<p>Failed to load tokens. Please try again.</p>';
+      Toast.show('error', 'Error', 'Could not fetch token list.');
     }
-});
+  }
 
+  loadTokens();
+});
