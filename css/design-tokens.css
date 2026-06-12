@@ -4,10 +4,9 @@
    ============================================================ */
 
 :root {
-
   /* ──────────────────────────────────────────────
      COLOR PALETTE
-     Gold & Deep Black Theme
+     Theme: Black, Gold, Blue
      ────────────────────────────────────────────── */
 
   /* Backgrounds */
@@ -16,24 +15,23 @@
   --color-bg-card-hover:  #121212;
   --color-bg-elevated:    #181818;
   --color-bg-input:       #050505;
-  --color-bg-overlay:     rgba(0, 0, 0, 0.90);
 
-  /* Borders */
+  /* Brand: Gold (Luxury/Factory) */
+  --color-gold:           #D4AF37;
+  --color-gold-bright:    #F3E5AB;
+  --color-gold-dim:       rgba(212, 175, 55, 0.12);
+  --color-gold-glow:      rgba(212, 175, 55, 0.25);
+
+  /* Brand: Blue/Cyan (Tech/Network) */
+  --color-blue:           #00E5FF;
+  --color-blue-bright:    #A3F8FF;
+  --color-blue-dim:       rgba(0, 229, 255, 0.12);
+  --color-blue-glow:      rgba(0, 229, 255, 0.25);
+
+  /* Borders & Focus */
   --color-border:         rgba(212, 175, 55, 0.15);
-  --color-border-subtle:  rgba(255, 255, 255, 0.05);
-  --color-border-focus:   rgba(212, 175, 55, 0.60);
-
-  /* Brand — Gold Theme (Primary Accent) */
-  --color-accent:         #D4AF37; /* Emas standar */
-  --color-accent-bright:  #F3E5AB; /* Vanilla Gold */
-  --color-accent-dim:     rgba(212, 175, 55, 0.12); 
-  --color-accent-glow:    rgba(212, 175, 55, 0.25);
-
-  /* Secondary Accent — Deep Gold */
-  --color-secondary:      #AA7C11; 
-  --color-secondary-bright:#F3E5AB;
-  --color-secondary-dim:  rgba(170, 124, 17, 0.12);
-  --color-secondary-glow: rgba(170, 124, 17, 0.25);
+  --color-border-subtle:  rgba(255, 255, 255, 0.08);
+  --color-border-focus:   var(--color-gold);
 
   /* Text Colors */
   --color-text-primary:   #FFFFFF;
@@ -42,91 +40,61 @@
 
   /* Status Colors */
   --color-success:        #22C55E;
-  --color-success-dim:    rgba(34, 197, 94, 0.10);
   --color-error:          #EF4444;
-  --color-error-dim:      rgba(239, 68, 68, 0.10);
   --color-warning:        #F59E0B;
-  --color-warning-dim:    rgba(245, 158, 11, 0.10);
 
   /* ──────────────────────────────────────────────
      TYPOGRAPHY
      ────────────────────────────────────────────── */
 
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --font-mono: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 
   --text-xs:    0.75rem;
   --text-sm:    0.875rem;
-  --text-base:  1.00rem;
+  --text-base:  1rem;
   --text-lg:    1.125rem;
   --text-xl:    1.25rem;
-  --text-2xl:   1.50rem;
+  --text-2xl:   1.5rem;
   --text-3xl:   1.875rem;
   --text-4xl:   2.25rem;
-  --text-5xl:   3.00rem;
-  --text-6xl:   3.75rem;
+  --text-5xl:   3rem;
 
-  --fw-light:    300;
   --fw-regular:  400;
   --fw-medium:   500;
   --fw-semibold: 600;
   --fw-bold:     700;
   --fw-black:    800;
 
-  --leading-none:   1;
-  --leading-tight:  1.25;
-  --leading-snug:   1.375;
-  --leading-normal: 1.5;
-  --leading-relaxed:1.625;
-  --leading-loose:  2;
-
   /* ──────────────────────────────────────────────
-     SPACING
+     SPACING & LAYOUT
      ────────────────────────────────────────────── */
 
   --navbar-height: 4.5rem;
   --container-max: 76.25rem;
-  --container-pad: 2.00rem;
+  --container-pad: 1.5rem;
 
   --space-1:  0.25rem;
-  --space-2:  0.50rem;
+  --space-2:  0.5rem;
   --space-3:  0.75rem;
-  --space-4:  1.00rem;
-  --space-5:  1.25rem;
-  --space-6:  1.50rem;
-  --space-8:  2.00rem;
-  --space-10: 2.50rem;
-  --space-12: 3.00rem;
-  --space-16: 4.00rem;
-  --space-20: 5.00rem;
-  --space-24: 6.00rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
 
   /* ──────────────────────────────────────────────
-     BORDERS & RADIUS
+     COMPONENTS & EFFECTS
      ────────────────────────────────────────────── */
 
-  --radius-sm:  6px;
-  --radius-md:  10px;
-  --radius-lg:  16px;
-  --radius-xl:  24px;
-  --radius-full: 9999px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  20px;
 
-  /* ──────────────────────────────────────────────
-     SHADOWS
-     ────────────────────────────────────────────── */
-
-  --shadow-card:    0 0 0 1px var(--color-border), 0 4px 24px rgba(0, 0, 0, 0.70);
-  --shadow-elevated: 0 0 0 1px var(--color-border), 0 8px 40px rgba(0, 0, 0, 0.90);
-  --shadow-accent:  0 0 20px var(--color-accent-glow);
-  --shadow-secondary: 0 0 20px var(--color-secondary-glow);
-  --shadow-focus:   0 0 0 3px rgba(212, 175, 55, 0.30);
-
-  /* ──────────────────────────────────────────────
-     TRANSITIONS
-     ────────────────────────────────────────────── */
-
-  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast:   150ms;
-  --duration-normal: 250ms;
-  --duration-slow:   350ms;
+  --transition-default: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.15);
 }
