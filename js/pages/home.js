@@ -1,45 +1,58 @@
-import { ContractManager } from "../core/contract.js";
-import { WalletManager } from "../core/wallet.js";
+/* ============================================================
+   js/pages/home.js
+   Logic for landing page: Connect wallet, load stats.
+   ============================================================ */
 
-/**
- * EVOZX Home Page Logic
- * Menangani inisialisasi data dan interaksi UI di halaman utama.
- */
+import { WalletManager } from '../core/wallet.js';
+import { ContractManager } from '../core/contract.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
-    
-    // 1. Update Statistik dari Blockchain
+  
+  // ── UI References ────────────────────────────────────────
+  const connectBtn = document.getElementById('connectWalletBtn');
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const statTotalTokens = document.getElementById('statTotalTokens');
+
+  // ── Initialize Stats ─────────────────────────────────────
+  async function loadStats() {
     try {
-        const total = await ContractManager.getTotalTokens();
-        const totalEl = document.getElementById('statTotalTokens');
-        
-        if (totalEl) {
-            totalEl.textContent = total.toLocaleString();
-        }
-    } catch (error) {
-        console.error("Error saat memuat statistik token:", error);
-        const totalEl = document.getElementById('statTotalTokens');
-        if (totalEl) totalEl.textContent = "0"; // Fallback jika gagal
+      const total = await ContractManager.getTotalTokens();
+      if (statTotalTokens) {
+        statTotalTokens.textContent = total.toLocaleString();
+      }
+    } catch (err) {
+      console.error('Failed to load stats:', err);
+      if (statTotalTokens) statTotalTokens.textContent = '—';
     }
+  }
 
-    // 2. Inisialisasi Wallet Button
-    const connectBtn = document.getElementById('connectWalletBtn');
-    if (connectBtn) {
-        connectBtn.addEventListener('click', async () => {
-            try {
-                await WalletManager.connect();
-                // Opsional: Update label button setelah sukses connect
-                const label = document.getElementById('connectBtnLabel');
-                if (label) label.textContent = "Connected";
-            } catch (error) {
-                console.error("Wallet connection failed:", error);
-            }
-        });
-    }
+  loadStats();
 
-    // 3. (Opsional) Cek status wallet saat page load
+  // ── UI Events ────────────────────────────────────────────
+  
+  // Connect Wallet Action
+  connectBtn.addEventListener('click', async () => {
     if (WalletManager.isConnected()) {
-        const label = document.getElementById('connectBtnLabel');
-        if (label) label.textContent = "Connected";
+      WalletManager.disconnect();
+    } else {
+      await WalletManager.connect();
     }
-});
+  });
 
+  // Hamburger Menu Toggle
+  hamburgerBtn.addEventListener('click', () => {
+    const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+    hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+    mobileDrawer.classList.toggle('active');
+  });
+
+  // Listen to Wallet State (Optional: Update UI if wallet state changes)
+  WalletManager.on('connected', (data) => {
+    console.log('Wallet connected:', data.address);
+  });
+
+  WalletManager.on('disconnected', () => {
+    console.log('Wallet disconnected');
+  });
+});
