@@ -1,5 +1,5 @@
 /* ============================================================
-   EVOZX ULTIMATE FACTORY — WALLET MANAGER
+   js/core/wallet.js
    Handles: connect, disconnect, network switch, state sync, persistence
    ============================================================ */
 
@@ -22,7 +22,9 @@ export const WalletManager = (() => {
   }
 
   function _emit(event, data) {
-    (_listeners[event] || []).forEach(fn => fn(data));
+    if (_listeners[event]) {
+      _listeners[event].forEach(fn => fn(data));
+    }
   }
 
   function _updateUI() {
@@ -41,6 +43,8 @@ export const WalletManager = (() => {
 
   // ── Network check & switch ────────────────────────────────
   async function _ensureNetwork() {
+    if (!_provider) return;
+    
     const network = await _provider.getNetwork();
     _chainId = Number(network.chainId);
 
@@ -66,6 +70,7 @@ export const WalletManager = (() => {
           throw switchErr;
         }
       }
+      // Re-initialize after network change
       _provider = new ethers.BrowserProvider(window.ethereum);
       _chainId  = EVOZX_CONFIG.CHAIN.ID;
     }
@@ -127,6 +132,7 @@ export const WalletManager = (() => {
   function getProvider() { return _provider; }
   function getChainId()  { return _chainId; }
   function isConnected() { return !!_address; }
+  
   function on(event, fn) {
     if (!_listeners[event]) _listeners[event] = [];
     _listeners[event].push(fn);
@@ -135,6 +141,7 @@ export const WalletManager = (() => {
   // ── Init / Auto-Reconnect ─────────────────────────────────
   async function _init() {
     if (localStorage.getItem('isWalletConnected') === 'true') {
+      // Small timeout to ensure ethers/provider is ready
       setTimeout(async () => {
         await connect(true); 
       }, 500);
@@ -161,4 +168,3 @@ export const WalletManager = (() => {
 
   return { connect, disconnect, getAddress, getSigner, getProvider, getChainId, isConnected, on };
 })();
-   
