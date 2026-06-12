@@ -42,26 +42,26 @@
     <div class="container">
       
       <div class="section-header" style="text-align: left; margin-bottom: var(--space-8);">
-        <p class="section-eyebrow">Phase 3</p>
+        <p class="section-eyebrow">Token Launchpad</p>
         <h1 class="section-title">Create Token</h1>
         <p class="section-subtitle">Deploy your custom ERC-20 token to EVOZ Mainnet.</p>
       </div>
 
       <div class="feature-card" style="max-width: 500px; margin: 0;">
-        <form id="createTokenForm">
+        <form id="createTokenForm" novalidate>
           <div class="form-group">
             <label for="tokenName">Token Name</label>
-            <input type="text" id="tokenName" placeholder="e.g. Satoshi Gold" required>
+            <input type="text" id="tokenName" name="Token Name" placeholder="e.g. Satoshi Gold" required>
           </div>
           
           <div class="form-group">
             <label for="tokenSymbol">Token Symbol</label>
-            <input type="text" id="tokenSymbol" placeholder="e.g. SGLD" required>
+            <input type="text" id="tokenSymbol" name="Token Symbol" placeholder="e.g. SGLD" required>
           </div>
 
           <div class="form-group">
             <label for="tokenSupply">Initial Supply</label>
-            <input type="number" id="tokenSupply" placeholder="1000000" required>
+            <input type="number" id="tokenSupply" name="Initial Supply" placeholder="1000000" required>
           </div>
 
           <div class="fee-card">
