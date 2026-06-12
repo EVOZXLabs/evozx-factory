@@ -29,10 +29,20 @@ const Toast = (() => {
 
     container.appendChild(el);
 
-    const remove = () => {
+        const remove = () => {
       el.classList.add('removing');
-      el.addEventListener('animationend', () => el.remove(), { once: true });
+      
+      // Menggunakan kombinasi event listener dan fallback timer
+      const onAnimationEnd = () => {
+        el.remove();
+      };
+      
+      el.addEventListener('animationend', onAnimationEnd, { once: true });
+      
+      // Fallback: Jika CSS animation gagal, hapus paksa setelah 500ms
+      setTimeout(onAnimationEnd, 500); 
     };
+     
 
     const timer = setTimeout(remove, duration);
     el.addEventListener('click', () => { clearTimeout(timer); remove(); });
