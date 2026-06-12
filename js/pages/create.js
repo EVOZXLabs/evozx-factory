@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         inputs.forEach(input => {
             if (!input.value.trim()) {
-                Toast.show('error', 'Validation Error', `Please fill in the ${input.name || 'field'}.`);
+                Toast.show('error', 'Validation Error', `Please fill in the ${input.name || 'field'}.`, 1500);
                 isValid = false;
             }
         });
@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const result = await ContractManager.createToken(config);
             
-            Toast.show('success', 'Deployed!', `Token created at: ${result.tokenAddress.slice(0, 10)}...`);
+            Toast.show('success', 'Deployed!', `Token created at: ${result.tokenAddress.slice(0, 10)}...`, 1500);
             form.reset();
             
         } catch (err) {
             console.error('Deployment Error:', err);
-            Toast.show('error', 'Deployment Failed', err.reason || err.message || 'Transaction rejected.');
+            Toast.show('error', 'Deployment Failed', err.reason || err.message || 'Transaction rejected.', 1500);
         } finally {
             deployBtn.disabled = false;
             deployBtn.innerText = 'Deploy Token';
