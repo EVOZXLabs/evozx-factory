@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verification Center — EVOZX Ultimate Factory</title>
+  <title>Verification — EVOZX Ultimate Factory</title>
 
   <link rel="stylesheet" href="../css/design-tokens.css" />
   <link rel="stylesheet" href="../css/base.css" />
@@ -14,15 +14,12 @@
 
   <header class="navbar" id="navbar">
     <div class="container navbar__inner">
-
       <a href="../index.html" class="navbar__brand">
-        <div class="navbar__logo-mark">
-          <img src="../assets/img/logo-evozx.png" alt="EVOZX Logo" width="32" height="32" />
-        </div>
+        <div class="navbar__logo-mark"><img src="../assets/img/logo-evozx.png" alt="EVOZX Logo" width="32" height="32" /></div>
         <span class="navbar__brand-text">EVOZX <span class="navbar__brand-accent">Labs</span></span>
       </a>
 
-      <nav class="navbar__nav" id="mainNav" aria-label="Main navigation">
+      <nav class="navbar__nav" id="mainNav">
         <a href="../index.html" class="nav-link" data-page="home">Home</a>
         <a href="create.html" class="nav-link" data-page="create">Create Token</a>
         <a href="explore.html" class="nav-link" data-page="explore">Explore</a>
@@ -31,57 +28,40 @@
       </nav>
 
       <div class="navbar__actions">
-        <div class="network-badge" id="networkBadge">
-          <span class="network-badge__dot"></span>
-          <span class="network-badge__label" id="networkLabel">EVOZ Mainnet</span>
-        </div>
-        <button class="btn btn--connect" id="connectWalletBtn" type="button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-          </svg>
-          <span id="connectBtnLabel">Connect Wallet</span>
-        </button>
-        <button class="navbar__hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+        <button class="btn btn--connect" id="connectWalletBtn" type="button">Connect Wallet</button>
       </div>
-
     </div>
-
-    <nav class="navbar__mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="create.html" class="nav-link">Create Token</a>
-      <a href="explore.html" class="nav-link">Explore</a>
-      <a href="my-tokens.html" class="nav-link">My Tokens</a>
-      <a href="verification.html" class="nav-link active">Verification Center</a>
-    </nav>
   </header>
 
   <main class="page-wrapper">
     <div class="container">
-
-      <div class="section-header" style="text-align: left; margin-bottom: var(--space-8); max-width: 100%;">
-        <p class="section-eyebrow">Phase 6</p>
-        <h1 class="section-title" style="font-size: var(--text-2xl);">Verification Center</h1>
-        <p class="section-subtitle">Standard Input JSON & constructor args export coming in Phase 6.</p>
+      <div class="section-header" style="text-align: left; margin-bottom: var(--space-8);">
+        <p class="section-eyebrow">Trust & Security</p>
+        <h1 class="section-title">Verify Token</h1>
+        <p class="section-subtitle">Submit your token address for verification and indexing.</p>
       </div>
 
-      <div class="card" style="max-width: 480px;">
-        <p style="color: var(--color-text-muted); font-size: var(--text-sm); line-height: var(--leading-relaxed);">
-          Full implementation coming soon.
-        </p>
+      <div class="feature-card" style="max-width: 500px; margin: 0;">
+        <form id="verifyForm" novalidate>
+          <div class="form-group">
+            <label for="tokenAddress">Token Contract Address</label>
+            <input type="text" id="tokenAddress" placeholder="0x..." required>
+          </div>
+          
+          <button type="submit" class="btn btn--primary" id="verifyBtn" style="width: 100%;">
+            Request Verification
+          </button>
+        </form>
+        <div id="verifyResult" style="margin-top: var(--space-4);"></div>
       </div>
-
     </div>
   </main>
 
-  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+  <div class="toast-container" id="toastContainer"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
-  <script src="../js/core/config.js"></script>
-  <script src="../js/core/wallet.js"></script>
-  <script src="../js/core/contract.js"></script>
   <script src="../js/modules/nav.js"></script>
   <script src="../js/modules/toast.js"></script>
+  <script type="module" src="../js/pages/verification.js"></script>
 </body>
 </html>
