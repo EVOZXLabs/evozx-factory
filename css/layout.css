@@ -9,7 +9,7 @@
 .stats-bar__item, 
 .btn, 
 .footer__link {
-  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  transition: all var(--duration-normal) var(--ease-out) !important;
 }
 
 /* ── Container ────────────────────────────────────────────── */
@@ -47,14 +47,14 @@
   font-weight: var(--fw-semibold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-cyan);
+  color: var(--color-accent);
   margin-bottom: var(--space-3);
 }
 
 .section-title {
   font-size: var(--text-3xl);
   font-weight: var(--fw-bold);
-  color: #ffffff;
+  color: var(--color-text-primary);
   margin-bottom: var(--space-4);
   line-height: var(--leading-tight);
 }
@@ -79,8 +79,8 @@
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background-image:
-    linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--color-accent-dim) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-accent-dim) 1px, transparent 1px);
   background-size: 50px 50px;
   z-index: 0;
   pointer-events: none;
@@ -94,8 +94,8 @@
   z-index: 0;
 }
 
-.hero__glow--left { width: 500px; height: 500px; top: -200px; left: -200px; background: var(--color-cyan); }
-.hero__glow--right { width: 500px; height: 500px; bottom: -200px; right: -200px; background: var(--color-gold); }
+.hero__glow--left { width: 500px; height: 500px; top: -200px; left: -200px; background: var(--color-accent); }
+.hero__glow--right { width: 500px; height: 500px; bottom: -200px; right: -200px; background: var(--color-secondary); }
 
 .hero__inner { position: relative; z-index: 2; }
 
@@ -106,7 +106,7 @@
   max-width: 900px;
   margin: 0 auto var(--space-6);
   line-height: var(--leading-tight);
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .hero__subheading {
@@ -133,9 +133,9 @@
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-6);
   padding: var(--space-8);
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: var(--color-bg-card);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-xl);
   max-width: 800px;
   margin: 0 auto;
@@ -149,7 +149,7 @@
   font-family: var(--font-mono);
   font-size: var(--text-xl);
   font-weight: var(--fw-bold);
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .stats-bar__label {
@@ -173,27 +173,27 @@
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-6);
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: var(--color-bg-card);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
-  border-color: var(--color-cyan) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: var(--color-accent);
+  background: var(--color-bg-card-hover);
 }
 
 .feature-card__icon {
   width: 48px; height: 48px;
   border-radius: var(--radius-md);
-  background: var(--color-cyan-dim);
+  background: var(--color-accent-dim);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-cyan);
+  color: var(--color-accent);
 }
 
-.feature-card__title { font-size: var(--text-lg); font-weight: var(--fw-bold); color: #ffffff; }
+.feature-card__title { font-size: var(--text-lg); font-weight: var(--fw-bold); color: var(--color-text-primary); }
 .feature-card__desc { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: var(--leading-relaxed); }
 
 /* ── Workflow Steps ───────────────────────────────────────── */
@@ -207,15 +207,15 @@
   border: 1px solid var(--color-border);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-mono); font-size: var(--text-lg); font-weight: var(--fw-bold);
-  color: var(--color-cyan-bright); margin-bottom: var(--space-6); position: relative; z-index: 2;
+  color: var(--color-accent-bright); margin-bottom: var(--space-6); position: relative; z-index: 2;
 }
 
 /* ── CTA Banner (Glassmorphism) ───────────────────────────── */
 
 .cta-banner {
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: var(--color-bg-card);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-xl);
   padding: var(--space-16);
   text-align: center;
@@ -223,26 +223,26 @@
   margin: 0 auto;
 }
 
-.cta-banner__title { font-size: var(--text-2xl); font-weight: var(--fw-bold); margin-bottom: var(--space-4); color: #ffffff; }
+.cta-banner__title { font-size: var(--text-2xl); font-weight: var(--fw-bold); margin-bottom: var(--space-4); color: var(--color-text-primary); }
 
 /* ── Footer Modern (Clean & Separated) ───────────────────────── */
 .footer {
   padding: var(--space-16) 0 var(--space-8);
   border-top: 1px solid var(--color-border-subtle);
-  background: #000000;
+  background: var(--color-bg-base);
   margin-top: var(--space-20);
 }
 
 .footer__main {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Brand di kiri, Nav di kanan */
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-12);
   margin-bottom: var(--space-12);
 }
 
 .footer__brand-name {
   font-size: var(--text-lg);
-  color: #ffffff;
+  color: var(--color-text-primary);
   margin-bottom: var(--space-2);
 }
 
@@ -260,7 +260,7 @@
 
 .footer__social-link {
   font-size: var(--text-sm);
-  color: var(--color-cyan);
+  color: var(--color-accent);
   font-weight: var(--fw-semibold);
 }
 
@@ -272,7 +272,7 @@
 
 .footer__heading {
   font-size: var(--text-sm);
-  color: #ffffff;
+  color: var(--color-text-primary);
   margin-bottom: var(--space-4);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -283,11 +283,11 @@
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   margin-bottom: var(--space-2);
-  transition: color 0.3s ease;
+  transition: color var(--duration-fast);
 }
 
 .footer__link:hover {
-  color: var(--color-cyan);
+  color: var(--color-accent);
 }
 
 .footer__bottom {
@@ -325,9 +325,8 @@
 @media (max-width: 480px) {
   :root {
     --container-pad: var(--space-3);
-    --text-2xl: 1.25rem; --text-xl: 1.125rem; --text-lg: 1rem; --text-base: 0.875rem; --text-sm: 0.75rem;
   }
   .hero__heading { font-size: var(--text-2xl); }
   .footer { padding: var(--space-6) 0; text-align: center; }
   .footer__links { justify-content: center; }
-   }
+}
