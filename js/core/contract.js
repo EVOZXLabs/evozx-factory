@@ -1,10 +1,14 @@
 /* ============================================================
-   EVOZX ULTIMATE FACTORY — CONTRACT INTERFACE
+   js/core/contract.js
    Read/write helpers for Factory & Token contracts.
-   Depends on: ethers, config.js, wallet.js
    ============================================================ */
+import { EVOZX_CONFIG } from './config.js';
+import { FACTORY_ABI } from '../../abi/factory.js';
+import { ERC20_ABI } from '../../abi/erc20.js';
+import { WalletManager } from './wallet.js';
+import { Toast } from '../modules/toast.js';
 
-const ContractManager = (() => {
+export const ContractManager = (() => {
 
   // ── Read-only provider (no wallet needed) ────────────────
 
@@ -15,7 +19,7 @@ const ContractManager = (() => {
   function _factoryRead() {
     return new ethers.Contract(
       EVOZX_CONFIG.CONTRACTS.FACTORY,
-      EVOZX_CONFIG.FACTORY_ABI,
+      FACTORY_ABI,
       _readProvider()
     );
   }
@@ -24,7 +28,7 @@ const ContractManager = (() => {
     if (!WalletManager.isConnected()) throw new Error('Wallet not connected');
     return new ethers.Contract(
       EVOZX_CONFIG.CONTRACTS.FACTORY,
-      EVOZX_CONFIG.FACTORY_ABI,
+      FACTORY_ABI,
       WalletManager.getSigner()
     );
   }
@@ -32,7 +36,7 @@ const ContractManager = (() => {
   function _evozxRead() {
     return new ethers.Contract(
       EVOZX_CONFIG.CONTRACTS.EVOZX,
-      EVOZX_CONFIG.EVOZX_ABI,
+      ERC20_ABI,
       _readProvider()
     );
   }
@@ -41,18 +45,18 @@ const ContractManager = (() => {
     if (!WalletManager.isConnected()) throw new Error('Wallet not connected');
     return new ethers.Contract(
       EVOZX_CONFIG.CONTRACTS.EVOZX,
-      EVOZX_CONFIG.EVOZX_ABI,
+      ERC20_ABI,
       WalletManager.getSigner()
     );
   }
 
   function tokenRead(address) {
-    return new ethers.Contract(address, EVOZX_CONFIG.TOKEN_ABI, _readProvider());
+    return new ethers.Contract(address, ERC20_ABI, _readProvider());
   }
 
   function tokenWrite(address) {
     if (!WalletManager.isConnected()) throw new Error('Wallet not connected');
-    return new ethers.Contract(address, EVOZX_CONFIG.TOKEN_ABI, WalletManager.getSigner());
+    return new ethers.Contract(address, ERC20_ABI, WalletManager.getSigner());
   }
 
   // ── Factory reads ─────────────────────────────────────────
@@ -75,7 +79,7 @@ const ContractManager = (() => {
   }
 
   async function getCreatorTokens(address) {
-    return await _factoryRead().creatorTokens(address);
+    return await _factoryRead().getTokensByCreator(address);
   }
 
   async function getCreatorTokenCount(address) {
@@ -91,10 +95,6 @@ const ContractManager = (() => {
     return await _factoryRead().symbolExists(symbol);
   }
 
-  /**
-   * Get deployment fee for a config object.
-   * Returns { total, burn, treasury } as BigInt strings.
-   */
   async function getDeploymentFee(config) {
     const total = await _factoryRead().getDeploymentFee(config);
     const burn  = (total * 30n) / 100n;
@@ -122,40 +122,31 @@ const ContractManager = (() => {
 
   // ── Factory write: createToken ────────────────────────────
 
-  /**
-   * Deploy a new token.
-   * @param {object} config - LaunchKitTypes.TokenConfig fields
-   * @returns {{ tx, receipt, tokenAddress }}
-   */
   async function createToken(config) {
-    // 1. Calculate fee
     const { total } = await getDeploymentFee(config);
-
-    // 2. Check balance
     const balance = await getEvozxBalance(WalletManager.getAddress());
+    
     if (balance < total) {
       throw new Error('Insufficient EVOZX balance for deployment fee.');
     }
 
-    // 3. Check & request allowance
     const allowance = await getEvozxAllowance(
       WalletManager.getAddress(),
       EVOZX_CONFIG.CONTRACTS.FACTORY
     );
+    
     if (allowance < total) {
       Toast.show('info', 'Approval Required', 'Approve EVOZX spend to continue.');
       await approveEvozx(EVOZX_CONFIG.CONTRACTS.FACTORY, total);
       Toast.show('success', 'Approved', 'EVOZX spend approved.');
     }
 
-    // 4. Deploy
     const factory = _factoryWrite();
     const tx = await factory.createToken(config);
     Toast.show('info', 'Transaction Sent', 'Waiting for confirmation…');
     const receipt = await tx.wait();
 
-    // 5. Parse TokenCreated event to get token address
-    const iface = new ethers.Interface(EVOZX_CONFIG.FACTORY_ABI);
+    const iface = new ethers.Interface(FACTORY_ABI);
     let tokenAddress = null;
     for (const log of receipt.logs) {
       try {
@@ -187,7 +178,6 @@ const ContractManager = (() => {
   // ── Public API ────────────────────────────────────────────
 
   return {
-    // Factory reads
     getTotalTokens,
     getAllTokens,
     getToken,
@@ -197,18 +187,13 @@ const ContractManager = (() => {
     isFactoryToken,
     symbolExists,
     getDeploymentFee,
-    // EVOZX
     getEvozxBalance,
     getEvozxAllowance,
     approveEvozx,
-    // Factory write
     createToken,
-    // Token contracts
     tokenRead,
     tokenWrite,
-    // Formatters
     formatEvozx,
     formatSupply,
   };
-
 })();
