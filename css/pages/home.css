@@ -2,7 +2,12 @@
    EVOZX ULTIMATE LAUNCH KIT — HOME PAGE STYLES
    ============================================================ */
 
-/* 1. Pengaturan Utama Heading (Agar besar sesuai keinginan Anda) */
+/* 0. Performance Optimization */
+.hero__heading, .feature-card {
+  will-change: transform, opacity;
+}
+
+/* 1. Pengaturan Utama Heading */
 .hero__heading {
   font-size: 3.5rem; 
   font-weight: 800;
