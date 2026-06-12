@@ -3,23 +3,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const deployBtn = document.getElementById('deployBtn');
 
     form.addEventListener('submit', async (e) => {
+        // Prevent default browser behavior
         e.preventDefault();
 
-        // 1. Check wallet connection
+        // Manual English validation
+        const inputs = form.querySelectorAll('input');
+        let isValid = true;
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                Toast.show('error', 'Validation Error', `Please fill in the ${input.name || 'field'}.`);
+                isValid = false;
+            }
+        });
+
+        if (!isValid) return;
+
+        // Check wallet connection
         if (!WalletManager.isConnected()) {
             Toast.show('error', 'Wallet', 'Please connect your wallet first.');
             return;
         }
 
-        // 2. Prepare data
+        // Prepare data
         const rawSupply = document.getElementById('tokenSupply').value;
         const config = {
             name: document.getElementById('tokenName').value,
             symbol: document.getElementById('tokenSymbol').value,
-            supply: ethers.parseUnits(rawSupply, 18) // Convert to 18 decimals
+            supply: ethers.parseUnits(rawSupply, 18) 
         };
 
-        // 3. Execute deployment
+        // Execute deployment
         try {
             deployBtn.disabled = true;
             deployBtn.innerText = 'Deploying...';
@@ -31,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
         } catch (err) {
             console.error('Deployment Error:', err);
-            Toast.show('error', 'Failed', err.reason || err.message || 'Transaction rejected.');
+            Toast.show('error', 'Deployment Failed', err.reason || err.message || 'Transaction rejected.');
         } finally {
             deployBtn.disabled = false;
             deployBtn.innerText = 'Deploy Token';
