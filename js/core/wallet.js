@@ -1,13 +1,14 @@
 /* ============================================================
    EVOZX ULTIMATE FACTORY — WALLET MANAGER
    Handles: connect, disconnect, network switch, state sync, persistence
-   Depends on: ethers (UMD global), config.js
    ============================================================ */
 
-const WalletManager = (() => {
+import { EVOZX_CONFIG } from "./config.js";
+import { Toast } from "../modules/toast.js";
+
+export const WalletManager = (() => {
 
   // ── State ────────────────────────────────────────────────
-
   let _provider  = null;
   let _signer    = null;
   let _address   = null;
@@ -15,7 +16,6 @@ const WalletManager = (() => {
   let _listeners = {};
 
   // ── Helpers ──────────────────────────────────────────────
-
   function _short(addr) {
     if (!addr) return '';
     return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
@@ -40,7 +40,6 @@ const WalletManager = (() => {
   }
 
   // ── Network check & switch ────────────────────────────────
-
   async function _ensureNetwork() {
     const network = await _provider.getNetwork();
     _chainId = Number(network.chainId);
@@ -73,7 +72,6 @@ const WalletManager = (() => {
   }
 
   // ── Connect & Persistence ──────────────────────────────────
-
   async function connect(isAutoConnect = false) {
     if (!window.ethereum) {
       if (!isAutoConnect) Toast.show('error', 'No Wallet Found', 'Install MetaMask to continue.');
@@ -83,7 +81,6 @@ const WalletManager = (() => {
     try {
       _provider = new ethers.BrowserProvider(window.ethereum);
       
-      // Request account if not auto-connecting
       if (!isAutoConnect) {
         await _provider.send('eth_requestAccounts', []);
       }
@@ -94,7 +91,6 @@ const WalletManager = (() => {
       _address = await _signer.getAddress();
       _chainId = EVOZX_CONFIG.CHAIN.ID;
 
-      // Update Persistence
       localStorage.setItem('isWalletConnected', 'true');
 
       _updateUI();
@@ -109,13 +105,12 @@ const WalletManager = (() => {
           Toast.show('error', 'Connection Failed', err.message || 'Error occurred.');
         }
       }
-      disconnect(); // Clear state if connection fails
+      disconnect();
       return null;
     }
   }
 
   // ── Disconnect ────────────────────────────────────────────
-
   function disconnect() {
     _provider  = null;
     _signer    = null;
@@ -127,7 +122,6 @@ const WalletManager = (() => {
   }
 
   // ── Getters & Subscriptions ───────────────────────────────
-
   function getAddress()  { return _address; }
   function getSigner()   { return _signer; }
   function getProvider() { return _provider; }
@@ -139,11 +133,8 @@ const WalletManager = (() => {
   }
 
   // ── Init / Auto-Reconnect ─────────────────────────────────
-
   async function _init() {
-    // Tunggu DOM siap sebelum update UI
     if (localStorage.getItem('isWalletConnected') === 'true') {
-      // Tunggu sebentar untuk memastikan provider tersedia
       setTimeout(async () => {
         await connect(true); 
       }, 500);
@@ -166,9 +157,8 @@ const WalletManager = (() => {
     });
   }
 
-  // Jalankan auto-init
   _init();
 
   return { connect, disconnect, getAddress, getSigner, getProvider, getChainId, isConnected, on };
-
 })();
+   
