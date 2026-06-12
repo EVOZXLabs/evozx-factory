@@ -12,7 +12,7 @@ const Toast = (() => {
     info:    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00AFFF" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
   };
 
-  function show(type = 'info', title = '', message = '', duration = 4500) {
+  function show(type = 'info', title = '', message = '', duration = 1500) {
     const container = document.getElementById('toastContainer');
     if (!container) return;
 
@@ -40,7 +40,7 @@ const Toast = (() => {
       el.addEventListener('animationend', onAnimationEnd, { once: true });
       
       // Fallback: Jika CSS animation gagal, hapus paksa setelah 500ms
-      setTimeout(onAnimationEnd, 500); 
+      setTimeout(onAnimationEnd, 200); 
     };
      
 
